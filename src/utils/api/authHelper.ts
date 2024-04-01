@@ -11,13 +11,13 @@ export async function authorizedHelper(
   res: NextApiResponse
 ): Promise<[valid: boolean, username?: string]> {
   if (!req.headers.authorization) {
-    res.status(401).json({ error: "Unauthorized" });
+    res.status(401).json({ message: "Unauthorized" });
     res.setHeader("Set-Cookie", "token=");
     return [false];
   } else {
     const token = req.headers.authorization.split(" ")[1];
     if (!token) {
-      res.status(401).json({ error: "Unauthorized" });
+      res.status(401).json({ message: "Unauthorized" });
       res.setHeader("Set-Cookie", "token=");
       return [false];
     } else {
@@ -27,7 +27,7 @@ export async function authorizedHelper(
       if (user) {
         return [true, user.username];
       } else {
-        res.status(401).json({ error: "Invalid JWT format" });
+        res.status(401).json({ message: "Invalid JWT format" });
         res.setHeader("Set-Cookie", "token=");
         return [false];
       }

@@ -15,14 +15,19 @@ export default function login(
     const loginBody = JSON.parse(req.body) as UserLoginPayload;
     const { username, password } = loginBody;
     if (!username || !password) {
-      res.status(500).json({ error: "Username and password are required" });
+      res.status(500).json({
+        message: "Username and password are required",
+        statusCode: 500,
+      });
     } else {
       console.log({ users });
       const user = users.find(
         (u) => u.username === username && u.password === password
       );
       if (!user) {
-        res.status(401).json({ error: "Invalid credentials" });
+        res
+          .status(401)
+          .json({ message: "Invalid credentials", statusCode: 401 });
         res.setHeader("Set-Cookie", "token=");
       } else {
         res.setHeader("Set-Cookie", `token=${user.token}`);

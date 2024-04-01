@@ -16,18 +16,25 @@ export default async function login(
     const { username, password, confirmPassword } = registerBody;
     if (!username || !password || !confirmPassword) {
       res.status(500).json({
-        error: "Username, password and confirm password are required",
+        message: "Username, password and confirm password are required",
+        statusCode: 500,
       });
     } else if (password !== confirmPassword) {
       res
         .status(500)
-        .json({ error: "Password and confirm password must match" });
+        .json({
+          message: "Password and confirm password must match",
+          statusCode: 500,
+        });
     } else {
       const user = users.find((u) => u.username === username);
       if (user) {
         res
           .status(500)
-          .json({ error: "A user with this username already exists" });
+          .json({
+            message: "A user with this username already exists",
+            statusCode: 500,
+          });
       } else {
         // sign a jwt token
         const token = await signJwt({ username });

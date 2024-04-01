@@ -5,7 +5,9 @@ export function validPOST(req: NextApiRequest, res: NextApiResponse) {
     res.status(404).end();
     return false;
   } else if (!req.body) {
-    res.status(500).json({ error: "Request is missing body" });
+    res
+      .status(500)
+      .json({ message: "Request is missing body", statusCode: 500 });
     return false;
   }
   return true;

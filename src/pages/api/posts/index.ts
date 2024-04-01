@@ -24,11 +24,14 @@ export default async function myPosts(
       const postBody = req.body as Post;
       const { content } = postBody;
       if (!content) {
-        res.status(500).json({ error: "Content is required" });
-      } else if (content.length > 140) {
         res
           .status(500)
-          .json({ error: "Content must be less than 140 characters" });
+          .json({ message: "Content is required", statusCode: 500 });
+      } else if (content.length > 140) {
+        res.status(500).json({
+          message: "Content must be less than 140 characters",
+          statusCode: 500,
+        });
       } else {
         // get the topics that being with #
         const topics = content
