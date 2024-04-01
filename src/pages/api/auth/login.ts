@@ -4,7 +4,6 @@ import { ErrorResponse } from "@/types/error/ErrorResponse";
 import { users } from "@/db/users";
 import { validPOST } from "@/utils/api/postHelper";
 import { UserLoginPayload } from "@/types/auth/UserLoginPayload";
-import { cookies } from "next/headers";
 
 export default function login(
   req: NextApiRequest,
@@ -28,9 +27,7 @@ export default function login(
         res
           .status(401)
           .json({ message: "Invalid credentials", statusCode: 401 });
-        res.setHeader("Set-Cookie", "token=");
       } else {
-        res.setHeader("Set-Cookie", `token=${user.token}`);
         res.status(200).json(user);
       }
     }

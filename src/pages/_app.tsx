@@ -7,6 +7,9 @@ import "@fontsource/roboto/700.css";
 
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
+import { useRouter } from "next/router";
+import { Navigation } from "@/components/Navigation";
+import { useEffect } from "react";
 
 /**
  *  {
@@ -36,9 +39,26 @@ const theme = createTheme({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { asPath, push } = useRouter();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      push("/yodelr/mine");
+    } else if (!asPath.includes("login") && !asPath.includes("register")) {
+      console.log("push to login");
+      push("/login");
+    }
+  });
+
+  const yodelrPage = asPath.includes("yodelr");
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-secondary">
+    <main
+      className={` bg-secondary min-h-screen w-screen overflow-hidden flex ${
+        yodelrPage ? "flex-row" : "flex-col items-center justify-between p-24"
+      }`}
+    >
       <ThemeProvider theme={theme}>
+        {yodelrPage && <Navigation />}
         <Component {...pageProps} />
       </ThemeProvider>
     </main>

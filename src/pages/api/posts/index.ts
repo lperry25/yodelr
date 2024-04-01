@@ -8,7 +8,6 @@ export default async function myPosts(
   req: NextApiRequest,
   res: NextApiResponse<Post[] | ErrorResponse>
 ) {
-  console.log(req.cookies);
   const [authorized, username] = await authorizedHelper(req, res);
   if (authorized && username) {
     if (req.method === "GET") {

@@ -1,7 +1,9 @@
 function getAuthHeader(options: object) {
   try {
     const token = localStorage.getItem("token");
+    console.log({ token });
     if (!token) {
+      return options;
     }
     return { ...options, authorization: `Bearer ${token}` };
   } catch (e) {
@@ -13,6 +15,10 @@ export async function fetcher(url: string, options = {}) {
   return fetch(url, getAuthHeader(options)).then(async (res) => {
     if (res.ok) {
       return res.json();
+    }
+    if (res.status === 401) {
+      // unauthorized calls should result in removing the token
+      localStorage.removeItem("token");
     }
     let message;
     try {
