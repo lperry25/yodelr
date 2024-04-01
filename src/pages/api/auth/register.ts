@@ -32,6 +32,7 @@ export default async function login(
         // sign a jwt token
         const token = await signJwt({ username });
         users.push({ username, token, password });
+        res.setHeader("Set-Cookie", `token=${token}`);
         res.status(200).json({ token });
       }
     }
