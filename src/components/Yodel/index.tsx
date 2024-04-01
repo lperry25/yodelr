@@ -30,6 +30,7 @@ export function Yodel({
           updateLatestPost(posts);
         }
         reset();
+        setError("");
       })
       .catch((e) => {
         setError(e?.message || "An error occurred");

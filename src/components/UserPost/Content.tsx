@@ -10,9 +10,9 @@ export function Content({
   const lines = content.split("\n");
 
   return (
-    <div className="text-[16px]">
+    <div className="text-[16px] flex-wrap whitespace-pre-wrap">
       {lines.map((line) => (
-        <div>
+        <div className="flex flex-wrap">
           {line.split(" ").map((word, index, i) => {
             // fix this for the hastags
             const topic = topics?.find((topic) => `#${topic}` === word);

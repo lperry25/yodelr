@@ -14,6 +14,8 @@ export function UserPost({
     year: "numeric",
     month: "long",
     day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
   });
 
   return (
@@ -25,7 +27,7 @@ export function UserPost({
         } rounded p-2 h-[50px] w-[50px]`}
       />
       <div className="flex flex-col w-full ml-3">
-        <div className="flex items-center">
+        <div className="flex flex-col md:flex-row text-left md:items-center">
           <div className="mr-4">{username}</div>
           <div className="text-xs text-gray-200">{displayDate}</div>
         </div>

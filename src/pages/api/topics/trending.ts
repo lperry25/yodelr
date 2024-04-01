@@ -3,10 +3,7 @@ import { ErrorResponse } from "@/types/error/ErrorResponse";
 import { authorizedHelper } from "@/utils/api/authHelper";
 import { posts } from "@/db/posts";
 import { Post } from "@/types/post/Post";
-
-interface TrendingTopics {
-  [key: string]: number;
-}
+import { TrendingTopics } from "@/types/trendingTopics/TrendingTopics";
 
 export default async function trendingTopics(
   req: NextApiRequest,
