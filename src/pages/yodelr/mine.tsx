@@ -34,7 +34,11 @@ export default function Mine() {
           </p>
         ) : (
           myPosts?.map((post) => (
-            <UserPost post={post} loggedInUser={loggedInUser} />
+            <UserPost
+              post={post}
+              loggedInUser={loggedInUser}
+              key={`${post.username}-${post.timestamp}`}
+            />
           ))
         )}
       </div>

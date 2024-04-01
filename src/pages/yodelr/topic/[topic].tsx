@@ -37,7 +37,11 @@ export default function Topic() {
           <p className="text-center text-lightBlue">{`Looks like the conversation around #${topic} has not started yet...`}</p>
         ) : (
           posts?.map((post) => (
-            <UserPost post={post} loggedInUser={loggedInUser} />
+            <UserPost
+              post={post}
+              loggedInUser={loggedInUser}
+              key={`${post.username}-${post.timestamp}`}
+            />
           ))
         )}
       </div>

@@ -39,7 +39,7 @@ export default function TrendingTopics() {
         Trending Yodels
       </h1>
       <p className="text-center my-3">
-        Select the timeframe you're interested in
+        Select the timeframe you&apos;re interested in
       </p>
       <TrendingTime setTo={setTo} setFrom={setFrom} />
       <div className="flex flex-col justify-start gap-6 px-4 h-full mt-10 overflow-y-auto">

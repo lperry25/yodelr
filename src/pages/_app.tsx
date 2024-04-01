@@ -49,7 +49,7 @@ export default function App({ Component, pageProps }: AppProps) {
     } else if (!asPath.includes("login") && !asPath.includes("register")) {
       push("/login");
     }
-  }, [asPath]);
+  }, [asPath, push]);
 
   const yodelrPage = asPath.includes("yodelr");
   return (

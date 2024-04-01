@@ -12,7 +12,7 @@ export function Content({
   return (
     <div className="text-[16px] flex-wrap whitespace-pre-wrap">
       {lines.map((line) => (
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap" key={line}>
           {line.split(" ").map((word, index, i) => {
             // fix this for the hastags
             const topic = topics?.find((topic) => `#${topic}` === word);
