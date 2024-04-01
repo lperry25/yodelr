@@ -28,13 +28,12 @@ export default function TrendingTopics() {
       (data: ITrendingTopics) => setTopics(data)
     );
   }, [to, from]);
-  console.log({ topics });
 
   const topicsList = topics ? Object.entries(topics) : [];
   const orderedTopics = topicsList.sort((a, b) => b[1] - a[1]);
 
   return (
-    <div className="flex flex-col justify-between w-4/5">
+    <div className="flex flex-col justify-between w-4/5 max-h-screen">
       <h1 className="flex flex-col items-center text-center mt-10 text-purple text-2xl">
         <TagIcon fontSize="large" />
         Trending Yodels
@@ -43,7 +42,7 @@ export default function TrendingTopics() {
         Select the timeframe you're interested in
       </p>
       <TrendingTime setTo={setTo} setFrom={setFrom} />
-      <div className="flex flex-col justify-start gap-6 px-4 h-full mt-10">
+      <div className="flex flex-col justify-start gap-6 px-4 h-full mt-10 overflow-y-auto">
         {topicsList.length < 1 ? (
           <p className="text-center text-lightBlue">
             No topics are trending right now for this time period. Start the

@@ -10,7 +10,7 @@ export async function authorizedHelper(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<[valid: boolean, username?: string]> {
-  console.log(req.headers.authorization);
+
   if (!req.headers.authorization) {
     res
       .status(401)

@@ -27,12 +27,12 @@ export default function Topic() {
   };
 
   return (
-    <div className="flex flex-col justify-between w-4/5">
+    <div className="flex flex-col justify-between w-4/5 max-h-screen">
       <h1 className="flex flex-col items-center text-center mt-10 text-purple text-2xl">
         <TagIcon fontSize="large" />
         {`Yodels about #${topic}`}
       </h1>
-      <div className="flex flex-col justify-end gap-6 px-4 h-full">
+      <div className="flex flex-col justify-end gap-6 px-4 h-full overflow-y-auto">
         {!posts || posts.length < 1 ? (
           <p className="text-center text-lightBlue">{`Looks like the conversation around #${topic} has not started yet...`}</p>
         ) : (

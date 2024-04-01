@@ -43,7 +43,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      console.log(asPath, asPath.includes("yodelr"));
       if (!asPath.includes("yodelr")) {
         push("/yodelr/mine");
       }
