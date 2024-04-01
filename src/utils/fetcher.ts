@@ -1,11 +1,14 @@
 function getAuthHeader(options: object) {
   try {
     const token = localStorage.getItem("token");
-    console.log({ token });
     if (!token) {
       return options;
     }
-    return { ...options, authorization: `Bearer ${token}` };
+    return {
+      ...options,
+      // @ts-ignore
+      headers: { ...options.headers, authorization: `Bearer ${token}` },
+    };
   } catch (e) {
     return options;
   }

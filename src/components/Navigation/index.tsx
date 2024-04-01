@@ -34,11 +34,11 @@ export function Navigation({}) {
       <div className="flex flex-col gap-4 p-6">
         <Link href="/yodelr/trending" className="inline-flex">
           <TagIcon />
-          <span className="hidden lg:block ml-2">Trending Yodels</span>
+          <span className="hidden md:block ml-2">Trending Yodels</span>
         </Link>
         <Link href="/yodelr/mine" className="inline-flex">
           <CampaignIcon />
-          <span className="hidden lg:block ml-2">My Yodels</span>
+          <span className="hidden md:block ml-2">My Yodels</span>
         </Link>
         <Link
           href="/"
@@ -46,7 +46,7 @@ export function Navigation({}) {
           onClick={() => localStorage.removeItem("token")}
         >
           <WavingHandIcon />
-          <span className="hidden lg:block ml-2">Log out</span>
+          <span className="hidden md:block ml-2">Log out</span>
         </Link>
       </div>
     </div>

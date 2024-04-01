@@ -5,18 +5,33 @@ import { useState } from "react";
 import { set, useForm } from "react-hook-form";
 
 /** component for writing your yodels */
-export function Yodel({ placeholder }: { placeholder?: string }) {
-  const { register, handleSubmit, watch } = useForm<Post>();
+export function Yodel({
+  placeholder,
+  updateLatestPost,
+}: {
+  placeholder?: string;
+  updateLatestPost?: (post: Post[]) => void;
+}) {
+  const { register, handleSubmit, watch, reset } = useForm<Post>();
 
   const [error, setError] = useState<string>("");
 
   const onSubmit = (data: Post) => {
-    fetcher("/api/posts", { method: "POST", body: JSON.stringify(data) })
-      .then(() => {
-        // TODO: handle what I do here
+    fetcher("/api/posts", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((posts) => {
+        // the latest post gets added to viewed posted list when viewing my posts
+        if (updateLatestPost && posts) {
+          updateLatestPost(posts);
+        }
+        reset();
       })
       .catch((e) => {
-        console.log({ e });
         setError(e?.message || "An error occurred");
       });
   };
@@ -26,8 +41,15 @@ export function Yodel({ placeholder }: { placeholder?: string }) {
       {error && <div className="text-red-700">{error}</div>}
       <div className="relative p-4">
         <textarea
-          className="rounded border-primary border-2 w-full h-[125px] overflow-y-scroll p-2 bg-transparent resize-none"
+          className={
+            "rounded border-primary border-2 w-full h-[125px] overflow-y-scroll p-2 " +
+            "bg-transparent resize-none placeholder:text-lightBlue " +
+            "placeholder:opacity-60 "
+          }
           placeholder={placeholder}
+          onKeyDown={(e) => {
+            e.code === "Enter" && !e.shiftKey && handleSubmit(onSubmit)();
+          }}
           {...register("content", { required: true })}
         ></textarea>
         <button

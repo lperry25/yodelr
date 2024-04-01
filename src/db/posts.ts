@@ -8,13 +8,13 @@ import { Post } from "@/types/post/Post";
 export let posts: Post[] = [
   {
     username: "test-user",
-    content: "This is a test post",
+    content: "This is a #test post",
     timestamp: "2021-01-01T00:00:00Z",
     topics: ["test"],
   },
   {
-    username: "lauraperry",
-    content: "This is a different test post",
+    username: "laura",
+    content: "This is a different #test post",
     timestamp: "2021-01-01T00:00:00Z",
     topics: ["test"],
   },

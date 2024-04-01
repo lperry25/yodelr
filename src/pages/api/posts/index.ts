@@ -11,12 +11,11 @@ export default async function myPosts(
   const [authorized, username] = await authorizedHelper(req, res);
   if (authorized && username) {
     if (req.method === "GET") {
-      console.log({ posts });
       const userPosts = posts
         .filter((p) => p.username === username)
         .sort(
           (a, b) =>
-            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+            new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
         );
       res.status(200).json(userPosts);
     } else if (req.method === "POST") {
@@ -37,13 +36,14 @@ export default async function myPosts(
           .split(" ")
           .filter((word) => word.startsWith("#"))
           .map((topic) => topic.slice(1));
-        posts.push({
+        const newPost = {
           content,
           username,
           topics,
           timestamp: new Date().toISOString(),
-        });
-        res.status(200).end();
+        };
+        posts.push(newPost);
+        res.status(200).json([newPost]);
       }
     } else {
       res.status(404).end();

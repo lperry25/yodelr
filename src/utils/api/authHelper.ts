@@ -10,13 +10,16 @@ export async function authorizedHelper(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<[valid: boolean, username?: string]> {
+  console.log(req.headers.authorization);
   if (!req.headers.authorization) {
-    res.status(401).json({ message: "Unauthorized" });
+    res
+      .status(401)
+      .json({ message: "Unauthorized. Missing authorization header." });
     return [false];
   } else {
     const token = req.headers.authorization.split(" ")[1];
     if (!token) {
-      res.status(401).json({ message: "Unauthorized" });
+      res.status(401).json({ message: "Unauthorized. Missing token." });
       return [false];
     } else {
       // verify the token

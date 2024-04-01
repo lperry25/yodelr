@@ -19,7 +19,6 @@ export default function login(
         statusCode: 500,
       });
     } else {
-      console.log({ users });
       const user = users.find(
         (u) => u.username === username && u.password === password
       );

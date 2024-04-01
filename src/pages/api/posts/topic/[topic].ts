@@ -12,10 +12,8 @@ export default async function byTopic(
   if (authorized && username) {
     if (req.method === "GET") {
       const { topic } = req.query;
-      console.log({ posts, topic });
       const topicPosts = posts
         .filter((p) => {
-          console.log(p.topics);
           return (
             p.topics.findIndex((postTopic) => postTopic === (topic as string)) >
             -1
