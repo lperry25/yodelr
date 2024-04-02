@@ -14,7 +14,6 @@ export function Content({
       {lines.map((line) => (
         <div className="flex flex-wrap" key={line}>
           {line.split(" ").map((word, index, i) => {
-            // fix this for the hastags
             const topic = topics?.find((topic) => `#${topic}` === word);
             if (topic) {
               return (

@@ -67,6 +67,8 @@ The frontend code is mostly split between the `/pages` and `/components` directo
 
 There was an architecutre decision to make this demo using the [NextJs Pages Router](https://nextjs.org/docs/pages) instead of the [App Router](https://nextjs.org/docs/app). This decision was made based off of what I am more familiar with based on time restrictions. It could be an interesting task to refactor the frontend to use the App Router instead in order to take full advantage over server-side components. Given the small scope of this demo, I did not think it would be necessary for server-side components.
 
+For the UI I also chose to use Tailwind CSS and Material UI. Tailwind CSS is my preferred library for apply style to components as I like that the classes can be added easily and live directly in the component. Material UI was chosen to quickly create inputs and Icons.
+
 ### Back-End
 - **Environment**: Node.js
 - **Framework**: NextJs

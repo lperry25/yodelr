@@ -11,16 +11,6 @@ import { useRouter } from "next/router";
 import { Navigation } from "@/components/Navigation";
 import { useEffect } from "react";
 
-/**
- *  {
-        background: "#8f7eff",
-        primary: "#000099",
-        secondary: "#bbb1ff",
-        lightBlue: "#634bff",
-        royalBlue: "#0000cc",
-        purple: "#000066",
-      }
- */
 const theme = createTheme({
   palette: {
     primary: {
