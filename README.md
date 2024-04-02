@@ -7,7 +7,7 @@ Yodelr is inspired by the concept of a social messaging platform where users can
 
 ## Yodelr demo
 
-A demo version of this application is hosted on vercel and can be accessed (here)[https://yodelr-lperry25.vercel.app/]
+A demo version of this application is hosted on vercel and can be accessed [here](https://yodelr.vercel.app/)
 
 ## Setup and run instructions
 
@@ -34,15 +34,15 @@ To run the application in development mode you can skip the build step and just 
 ## Overview of the API endpoints
 Since the API was written using NextJs routes, all API routes live in the pages/api/ directory. 
 
-The following routes were created to handle the demo application:
-    - POST `/auth/regsiter` - Registers a user given an username, password and confirmed password
-    - POST `/auth/login` - Logs in a user given an username and password
-    - POST `/posts` - Create a new post from the logged in user
-    - GET `/posts` - Get all posts
-    - GET `/posts/mine` - Get all posts for the logged in user
-    - GET `/posts/{username}` - Get all posts from a specific user
-    - GET `/posts/topic/{topic}` - Retrieve posts for a specific topic.
-    - GET `/topics/trending` - Retrieve a list of trending topics with their number of posts for a given period.
+The following routes were created to handle the demo application:  
+    - POST `/auth/regsiter` - Registers a user given an username, password and confirmed password  
+    - POST `/auth/login` - Logs in a user given an username and password  
+    - POST `/posts` - Create a new post from the logged in user  
+    - GET `/posts` - Get all posts  
+    - GET `/posts/mine` - Get all posts for the logged in user  
+    - GET `/posts/{username}` - Get all posts from a specific user  
+    - GET `/posts/topic/{topic}` - Retrieve posts for a specific topic.  
+    - GET `/topics/trending` - Retrieve a list of trending topics with their number of posts for a given period.  
 
 ## Architecture
 NextJs was chosen for this application, since it's capabilities to write both frontend and server-side APIs make it an ideal choice when spinning up a demo quickly. The easy integration with Vercel allows you to host the demo both on Preview branches and the main branch.
@@ -51,11 +51,11 @@ The decision to use NextJs for the API in addition to the UI had a few downsides
 
 ### Designs
 
-Four wireframes were sketched detailing the screens that would be created for Yodelr. There where two mobile and two desktop screens sketched.
+Four wireframes were sketched detailing the screens that would be created for Yodelr. There where two mobile and two desktop screens sketched. All wireframes 
 
-The (desktop screens)[https://yodelr-lperry25.vercel.app/img/wireframes/desktop-wireframes.png] show the User login screen and the user's feed.
+The [desktop screens](https://yodelr.vercel.app/wireframes/desktop-wireframes.png) show the User login screen and the user's feed.
 
-The (mobile screens)[https://yodelr-lperry25.vercel.app/img/wireframes/mobile-wireframes.png] show the Trending topics screen and an example of a single topic feed.
+The [mobile screens](https://yodelr.vercel.app/wireframes/mobile-wireframes.png) show the Trending topics screen and an example of a single topic feed.
 
 ### Front-End
 

@@ -1,6 +1,7 @@
 import { User } from "@/types/auth/User";
 import jwt from "jsonwebtoken";
 
+
 export async function signJwt(
   user: Omit<User, "password" | "token">
 ): Promise<string> {
