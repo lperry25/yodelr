@@ -21,7 +21,7 @@ export default function Topic() {
       if (!posts) {
         setPosts(newPost);
       } else {
-        setPosts([...posts, ...newPost]);
+        setPosts([...newPost, ...posts]);
       }
     }
   };
@@ -32,7 +32,7 @@ export default function Topic() {
         <TagIcon fontSize="large" />
         {`Yodels about #${topic}`}
       </h1>
-      <div className="flex flex-col justify-end gap-6 px-4 h-full overflow-y-auto">
+      <div className="flex flex-col-reverse	justify-start gap-6 px-4 h-full overflow-y-auto">
         {!posts || posts.length < 1 ? (
           <p className="text-center text-lightBlue">{`Looks like the conversation around #${topic} has not started yet...`}</p>
         ) : (

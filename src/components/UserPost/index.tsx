@@ -1,6 +1,7 @@
 import { Post } from "@/types/post/Post";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 import { Content } from "./Content";
+import Link from "next/link";
 
 export function UserPost({
   post,
@@ -28,7 +29,9 @@ export function UserPost({
       />
       <div className="flex flex-col w-full ml-3">
         <div className="flex flex-col md:flex-row text-left md:items-center">
-          <div className="mr-4">{username}</div>
+          <Link href={`/yodelr/${username}`} className="mr-4">
+            {username}
+          </Link>
           <div className="text-xs text-gray-200">{displayDate}</div>
         </div>
         <Content content={content} topics={topics} />

@@ -3,22 +3,18 @@ import { ErrorResponse } from "@/types/error/ErrorResponse";
 import { authorizedHelper } from "@/utils/api/authHelper";
 import { posts } from "@/db/posts";
 import { Post } from "@/types/post/Post";
+import { sortPosts } from "@/utils/api/postsHelper";
 
-export default async function myPosts(
+export default async function allPosts(
   req: NextApiRequest,
   res: NextApiResponse<Post[] | ErrorResponse>
 ) {
   const [authorized, username] = await authorizedHelper(req, res);
-  if (authorized && username) {
+  if (authorized) {
     if (req.method === "GET") {
-      const userPosts = posts
-        .filter((p) => p.username === username)
-        .sort(
-          (a, b) =>
-            new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-        );
-      res.status(200).json(userPosts);
-    } else if (req.method === "POST") {
+      const sortedPosts = sortPosts(posts);
+      res.status(200).json(sortedPosts);
+    } else if (req.method === "POST" && username) {
       const postBody = req.body as Post;
       const { content } = postBody;
       if (!content) {

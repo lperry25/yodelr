@@ -3,6 +3,7 @@ import Link from "next/link";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import TagIcon from "@mui/icons-material/Tag";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
+import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 
 export function Navigation({}) {
   const desktopLogo = (
@@ -35,6 +36,10 @@ export function Navigation({}) {
         <Link href="/yodelr/trending" className="inline-flex">
           <TagIcon />
           <span className="hidden md:block ml-2">Trending Yodels</span>
+        </Link>
+        <Link href="/yodelr/feed" className="inline-flex">
+          <DynamicFeedIcon />
+          <span className="hidden md:block ml-2">Yodelr Feed</span>
         </Link>
         <Link href="/yodelr/mine" className="inline-flex">
           <CampaignIcon />
