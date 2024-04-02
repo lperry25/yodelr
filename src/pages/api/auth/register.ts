@@ -36,9 +36,9 @@ export default async function login(
             statusCode: 500,
           });
       } else {
+        users.push({ username, password });
         // sign a jwt token
         const token = await signJwt({ username });
-        users.push({ username, token, password });
         res.status(200).json({ token });
       }
     }

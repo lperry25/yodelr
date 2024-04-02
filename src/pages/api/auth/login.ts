@@ -1,13 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { User } from "../../../types/auth/User";
 import { ErrorResponse } from "@/types/error/ErrorResponse";
 import { users } from "@/db/users";
 import { validPOST } from "@/utils/api/postHelper";
 import { UserLoginPayload } from "@/types/auth/UserLoginPayload";
+import { signJwt } from "@/utils/api/jwt/signJwt";
+import { UserToken } from "@/types/auth/UserToken";
 
-export default function login(
+export default async function login(
   req: NextApiRequest,
-  res: NextApiResponse<User | ErrorResponse>
+  res: NextApiResponse<UserToken | ErrorResponse>
 ) {
   // there is only a POST endpoint for users to login against
   if (validPOST(req, res)) {
@@ -27,7 +28,8 @@ export default function login(
           .status(401)
           .json({ message: "Invalid credentials", statusCode: 401 });
       } else {
-        res.status(200).json(user);
+        const token = await signJwt({ username });
+        res.status(200).json({ token });
       }
     }
   }
