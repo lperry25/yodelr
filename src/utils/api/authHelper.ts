@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { decodeJwt } from "./jwt/decodeJwt";
 /**
- * Helper function to check that the request is a GET with a valid user token
+ * Helper function to check if a request is authorized
+ * 
  * @param req
  * @param res
- * @returns
+ * @returns an array with a validity marker and the username if valid
  */
 export async function authorizedHelper(
   req: NextApiRequest,

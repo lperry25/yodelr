@@ -1,85 +1,87 @@
 
-# Yodelr Platform Development Task
-
-## Introduction
-
-Welcome to your development challenge! You are tasked with creating Yodelr, a cutting-edge micro-message communications platform. This project is designed to assess your skills in both front-end and back-end development, using a stack centered around JavaScript, React, and Node.js.
+# Yodelr Social Media Demo
 
 ## Project Overview
 
-Yodelr is inspired by the concept of a social messaging platform where users can post short messages and tag their content with topics. Your role is to develop this platform as a full-stack application, implementing both the client-side interface and the server-side API.
+Yodelr is inspired by the concept of a social messaging platform where users can post short messages and tag their content with topics. This demo implements the Yodelr application using NextJs for both the UI and server side API routes.
 
-### Objectives
+## Yodelr demo
 
-- Develop a **React-based front-end** that allows users to interact with the Yodelr platform.
-- Implement a **Node.js back-end** (using Express.js or a similar framework) that the front-end will communicate with.
-- Create a seamless user experience where front-end dynamically reflects the backend data.
+A demo version of this application is hosted on vercel and can be accessed (here)[https://yodelr-lperry25.vercel.app/]
 
-### Features
+## Setup and run instructions
 
-1. **User Interface**: Design a clean, intuitive UI that reflects modern web application standards.
-2. **User Registration**: Allow users to register with a username.
-3. **Message Posting**: Users can post messages up to 140 characters with or without topics identified by “#”.
-4. **Viewing Posts**: Display all messages from a user, sorted by recent posts.
-5. **Trending Topics**: Show popular topics based on message frequency over a specified time frame.
+Since the API and UI are both running on the NextJs framework. Both are run simultaneously from the root folder.
 
-## Technical Requirements
+### Install dependencies
 
-### Front-End
+Begin by installing the required dependencies from the root `npm install`
 
-- **Framework**: React
-- **Language**: JavaScript or TypeScript
-- **State Management**: Your choice (if you feel it is necessary to have one)
-- **API Communication**: Fetch API, or any similar library
+### Build the application
 
-### Back-End
+Now build the application by running the command `npm run build`
 
-- **Environment**: Node.js
-- **Framework**: Express.js or any framework you are comfortable with
-- **Data Storage**: In-memory storage (no persistent database required)
-- **API**: Design a RESTful API to handle the necessary operations.
+### Start the application
 
-## Tasks
+Once the application is built it can be started with the command `npm run start`
 
-### Back-End
+### Run in dev mode
 
-1. **Set up your Node.js server** using the framework of your choice or use the guide that is provided.
-2. **Implement the API** with the following endpoints:
-    - POST `/posts` - Create a new post.
+To run the application in development mode you can skip the build step and just run `npm run dev`
+
+** Note: Since all data is stored in memory, running in dev mode may result in lost data when the system rebuilds **
+
+## Overview of the API endpoints
+Since the API was written using NextJs routes, all API routes live in the pages/api/ directory. 
+
+The following routes were created to handle the demo application:
+    - POST `/auth/regsiter` - Registers a user given an username, password and confirmed password
+    - POST `/auth/login` - Logs in a user given an username and password
+    - POST `/posts` - Create a new post from the logged in user
     - GET `/posts` - Get all posts
+    - GET `/posts/mine` - Get all posts for the logged in user
+    - GET `/posts/{username}` - Get all posts from a specific user
     - GET `/posts/topic/{topic}` - Retrieve posts for a specific topic.
+    - GET `/topics/trending` - Retrieve a list of trending topics with their number of posts for a given period.
+
+## Architecture
+NextJs was chosen for this application, since it's capabilities to write both frontend and server-side APIs make it an ideal choice when spinning up a demo quickly. The easy integration with Vercel allows you to host the demo both on Preview branches and the main branch.
+
+The decision to use NextJs for the API in addition to the UI had a few downsides which I will detail further.
+
+### Designs
+
+Four wireframes were sketched detailing the screens that would be created for Yodelr. There where two mobile and two desktop screens sketched.
+
+The (desktop screens)[https://yodelr-lperry25.vercel.app/img/wireframes/desktop-wireframes.png] show the User login screen and the user's feed.
+
+The (mobile screens)[https://yodelr-lperry25.vercel.app/img/wireframes/mobile-wireframes.png] show the Trending topics screen and an example of a single topic feed.
 
 ### Front-End
 
-1. **Design a Wireframe:** Before coding, sketch out a basic wireframe for the Yodelr user interface. This could be a hand-drawn sketch, or you could use a free online wire-framing tool. Consider:
-    - Navigation
-    - Post creation with or without hashtag input
-    - Post display (username, timestamp, post)
-    - Any other components you think would be interesting to have.
-2. **Develop the UI** with React and TypeScript, ensuring it is responsive and user-friendly.
-3. **Implement the necessary components** to interact with the back-end API to display the features outlined in your wireframe.
+- **Framework**: NextJs
+- **Language**: TypeScript
+- **API Communication**: Fetch API
 
-## Evaluation Criteria
+The frontend code is mostly split between the `/pages` and `/components` directories with some helper functions found in the `/utils` and `/hooks` directories.
 
-- **Functionality**: The application works as described.
-- **Code Quality**: Clean, readable, and well-structured code.
-- **Architecture**: Logical division of components, use of appropriate patterns.
-- **Design**: Intuitive, responsive UI that provides a good user experience.
-- **Wireframe**: Intuitive and easy to follow
-- **Testing**: Writing tests for the code is out of scope for the task.
+There was the architecutre decision to make this demo using the NextJs pages routes instead of the app router. This decision was made based off of what I am more familiar with based on time restrictions. It could be an interesting task to refactor the frontend to use the app router instead in order to take full advantage over server-side components. Given the small scope of this demo, I did not think it would be necessary for server-side components.
 
-## Submission
+### Back-End
+- **Environment**: Node.js
+- **Framework**: NextJs
+- **Data Storage**: In-memory storage (see the `db` directory with mocked data)
 
-- Submit your solution in a `yodelr-ts_yourlastname.zip` file
-- Include a **README.md** with:
-    - Setup and run instructions.
-    - Overview of the API endpoints.
-    - Brief description of your architectural decisions.
+The decision to build the backend on NextJs was based both on the convenience of the NextJs API routes and an interest to use this feature. I have been working in NextJs for a couple years now, but have not found a place to use the API Routes yet.
 
-Make sure your application can be easily set up and run on a local machine.
+This demo seemed like a great opportunity to test out the API Routes. This allowed me to quickly create API endpoints that live very close to the UI. For a demo purpose it is very nice that the API can be hosted alongside the UI which makes it very quick to setup.
 
-## Additional Information
+I did find some draw backs to building the API in NextJs that I would not have found if I had used a framework like Express or Fastify: 
 
-Feel free to use third-party libraries if you think they will help, but ensure that the core functionality is built by you.
+#### Backend Directories
+NextJs API routes by creating an API route for every named file or directory inside the `/pages/api` directory. This means that all the helper functions I created needed to live in the route `utils` directory. I tried to improve this organization of files by creating a dedicated `utils/api` directory, however I would have preferred if the utils directory for the API routes could live closer to the API code. 
 
-Good luck!
+#### Seperation of API methods
+Other frameworks also work better for sperating out GET and POST commands on the same endpoint. I would have preferred an archictecture where there were seperate functions for the GET and POST on the 'posts' endpoint. 
+
+I think building a more complex backend in NextJs would start to become hard to read given the limiations I have found. However, for a quick demo like this application I think it worked really well to speed up development and deployment time.
