@@ -22,12 +22,16 @@ export default function TrendingTopics() {
   const [topics, setTopics] = useState<ITrendingTopics | undefined>(undefined);
   const [from, setFrom] = useState<Date | undefined>(undefined);
   const [to, setTo] = useState<Date | undefined>(undefined);
+  const [triggerCounter, setTriggerCounter] = useState(0);
 
   useEffect(() => {
     fetcher(`/api/topics/trending${buildSearch(to, from)}`).then(
       (data: ITrendingTopics) => setTopics(data)
     );
-  }, [to, from]);
+  }, [to, from, triggerCounter]);
+
+  // to get the latest trend we should refetch the current data after a post has been made
+  const triggerUpdate = () => setTriggerCounter((prev) => prev + 1);
 
   const topicsList = topics ? Object.entries(topics) : [];
   const orderedTopics = topicsList.sort((a, b) => b[1] - a[1]);
@@ -60,7 +64,10 @@ export default function TrendingTopics() {
           ))
         )}
       </div>
-      <Yodel placeholder="You're just one step away from starting the next Yodelr trend!" />
+      <Yodel
+        placeholder="You're just one step away from starting the next Yodelr trend!"
+        updateLatestPost={triggerUpdate}
+      />
     </div>
   );
 }

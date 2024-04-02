@@ -21,28 +21,32 @@ export default function PostsFeed({
 }) {
   const loggedInUser = useLoggedInUser();
 
-  if (!posts) {
-    return <Loading />;
-  }
+  const postsList = posts ? (
+    !posts || posts.length < 1 ? (
+      <p className="text-center text-lightBlue">{emptyText}</p>
+    ) : (
+      posts?.map((post) => (
+        <UserPost
+          post={post}
+          loggedInUser={loggedInUser}
+          key={`${post.username}-${post.timestamp}`}
+        />
+      ))
+    )
+  ) : null;
 
   return (
     <div className="flex flex-col justify-between w-4/5 max-h-screen">
-      <h1 className="flex flex-col items-center text-center mt-10 text-purple text-2xl">
+      <h1
+        className={`flex flex-col items-center text-center mt-10 text-purple text-2xl ${
+          !posts ? "animate-pulse" : ""
+        }`}
+      >
         {titleIcon}
         {titleText}
       </h1>
       <div className="flex flex-col-reverse justify-start gap-6 px-4 h-full overflow-y-auto">
-        {!posts || posts.length < 1 ? (
-          <p className="text-center text-lightBlue">{emptyText}</p>
-        ) : (
-          posts?.map((post) => (
-            <UserPost
-              post={post}
-              loggedInUser={loggedInUser}
-              key={`${post.username}-${post.timestamp}`}
-            />
-          ))
-        )}
+        {postsList}
       </div>
       <Yodel
         placeholder={yodelPlaceholder}
