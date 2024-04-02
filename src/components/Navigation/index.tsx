@@ -39,7 +39,7 @@ export function Navigation({}) {
         </Link>
         <Link href="/yodelr/feed" className="inline-flex">
           <DynamicFeedIcon />
-          <span className="hidden md:block ml-2">Yodelr Feed</span>
+          <span className="hidden md:block ml-2">Yodelrs</span>
         </Link>
         <Link href="/yodelr/mine" className="inline-flex">
           <CampaignIcon />

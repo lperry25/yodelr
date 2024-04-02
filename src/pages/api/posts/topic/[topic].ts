@@ -3,6 +3,7 @@ import { ErrorResponse } from "@/types/error/ErrorResponse";
 import { authorizedHelper } from "@/utils/api/authHelper";
 import { posts } from "@/db/posts";
 import { Post } from "@/types/post/Post";
+import { sortPosts } from "@/utils/api/postsHelper";
 
 export default async function byTopic(
   req: NextApiRequest,
@@ -12,18 +13,14 @@ export default async function byTopic(
   if (authorized && username) {
     if (req.method === "GET") {
       const { topic } = req.query;
-      const topicPosts = posts
-        .filter((p) => {
-          return (
-            p.topics.findIndex((postTopic) => postTopic === (topic as string)) >
-            -1
-          );
-        })
-        .sort(
-          (a, b) =>
-            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      const topicPosts = posts.filter((p) => {
+        return (
+          p.topics.findIndex((postTopic) => postTopic === (topic as string)) >
+          -1
         );
-      res.status(200).json(topicPosts);
+      });
+      const sortedTopics = sortPosts(topicPosts);
+      res.status(200).json(sortedTopics);
     } else {
       res.status(404).end();
     }
